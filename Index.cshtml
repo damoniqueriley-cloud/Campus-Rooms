@@ -1,0 +1,29 @@
+@model List<Room>
+
+@{
+    // Changing rooms needs Admin or Staff, so the Add button only shows to them
+    bool can_manage = User.IsInRole("Admin") || User.IsInRole("Staff");
+}
+
+<h1>Rooms</h1>
+<p>@ViewBag.Count rooms</p>
+
+@if (can_manage)
+{
+    <p><a class="btn btn-primary" asp-controller="Rooms" asp-action="Add">Add a room</a></p>
+}
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Seats</th>
+        <th>Projector</th>
+        <th>Building</th>
+        <th></th>
+    </tr>
+    @foreach (Room each_room in Model)
+    {
+        <partial name="_RoomRow" model="each_room" />
+    }
+</table>
