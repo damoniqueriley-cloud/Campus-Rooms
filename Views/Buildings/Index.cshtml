@@ -1,0 +1,18 @@
+@model List<Building>
+
+<h1>Buildings</h1>
+<p>@Model.Count buildings</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Rooms</th>
+    </tr>
+    @foreach (Building each_building in Model)
+    {
+        <tr>
+            <td><a asp-controller="Buildings" asp-action="Details" asp-route-id="@each_building.Id">@each_building.Name</a></td>
+            <td>@each_building.Rooms.Count</td>
+        </tr>
+    }
+</table>
